@@ -1,0 +1,19 @@
+services:
+  px4-ros2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: px4-ros2-gazebo:latest
+    container_name: px4-ros2-dev
+    privileged: true
+    stdin_open: true
+    tty: true
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - LIBGL_ALWAYS_INDIRECT=0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./workspace:/root/workspace:rw
+    command: /bin/bash
