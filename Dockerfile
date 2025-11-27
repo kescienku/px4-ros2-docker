@@ -24,6 +24,10 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     sudo \
     && rm -rf /var/lib/apt/lists/*
+    
+RUN apt-get update && apt-get install -y \
+    mesa-utils \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install ROS 2 Humble
 RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg && \

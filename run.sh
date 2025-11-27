@@ -1,17 +1,22 @@
 #!/bin/bash
 
-# Allow X11 connections from Docker
+# Allow X11 access
 xhost +local:docker
 
-# Run the container with X11 forwarding for Gazebo GUI
 docker run -it --rm \
     --name px4_dev \
     --privileged \
-    --net=host \
+    --gpus all \
     -e DISPLAY=$DISPLAY \
-    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+    -e NVIDIA_VISIBLE_DEVICES=all \
+    -e NVIDIA_DRIVER_CAPABILITIES=all \
+    -e __NV_PRIME_RENDER_OFFLOAD=1 \
+    -e __GLX_VENDOR_LIBRARY_NAME=nvidia \
+    -e __VK_LAYER_NV_optimus=NVIDIA_only \
     -e QT_X11_NO_MITSHM=1 \
+    --device=/dev/dri:/dev/dri \
+    --group-add video \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+    -v $HOME/.Xauthority:/home/px4user/.Xauthority:rw \
+    --network host \
     px4_ros2_gz:latest
-
-# Cleanup X11 permissions after exit
-xhost -local:docker
