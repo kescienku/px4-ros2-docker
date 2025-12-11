@@ -46,9 +46,9 @@ RUN wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pk
     libgz-sim8-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install ROS-Gazebo bridge packages
+# Install ROS-Gazebo bridge packages (Harmonic version)
 RUN apt-get update && apt-get install -y \
-    ros-humble-ros-gz \
+    ros-humble-ros-gzharmonic \
     && rm -rf /var/lib/apt/lists/*
 
 # Create user px4user with sudo privileges

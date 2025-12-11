@@ -18,6 +18,5 @@ docker run -it --rm \
     --group-add video \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/px4user/.Xauthority:rw \
-    -v $HOME/px4-sim-models:/home/px4user/PX4-Autopilot/Tools/simulation/gz/models:rw \
     --network host \
     px4_ros2_gz:latest
